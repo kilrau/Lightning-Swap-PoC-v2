@@ -27,18 +27,14 @@ $ go get -u github.com/Masterminds/glide
 
 ## Build Lightning Daemon
 
-Since the official `lnd` does not support cross chain swaps as of `lightningnetwork/lnd@6b0f984e3155adf8520d050f9b44f694fe099889`, we will use instead an xchain-swap enabled experimental `lnd` daemon. 
+Since the cross chain swaps was not yet merged into the official `lnd` master branch, we will use instead an xchain-swap enabled experimental `lnd` daemon. 
 
 #### Cross-chain swap enabled `lnd`
-To build and install the xchain-swap enabled experimental `lnd` daemon referenced [here](https://blog.lightning.engineering/announcement/2017/11/16/ln-swap.html)
+To build and install the xchain-swap enabled experimental `lnd` daemon 
 ```shell
-$ git clone -b swapz https://github.com/ExchangeUnion/lnd.git $GOPATH/src/github.com/lightningnetwork/lnd
+$ git clone -b multi-chain-phase-2 https://github.com/offerm/lnd.git $GOPATH/src/github.com/lightningnetwork/lnd
 $ cd $GOPATH/src/github.com/lightningnetwork/lnd
-$ glide install
-```
-Finally we can build
-```shell
-$ go install . ./cmd/...
+$ make && make install
 ```
 
 #### Bitcoin full node implementation `btcd`
