@@ -1,11 +1,30 @@
 [ [index](/README.md), [next](/LIGHTNING-01-peers.md) ]
 
 # Lightning
-This guide can be used to perform an instant BTC<->LTC atomic swap between two exchanges A & B on the lightning network. The exchanges are running the lightning network deamon (`lnd`) and are connected to the Bitecoin and Litecoin networks using `btcd` and `ltcd`. The guide follows the [Lightning Installation Guide](https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md) to build the dependencies (`Go`), currency daemons (`btcd` and `ltcd`) and the actual lightning network deamon (`lnd`).   
+This guide can be used to perform an instant BTC<->LTC atomic swap between two exchanges A & B on the lightning network. The exchanges are running the lightning network daemon (`lnd`) and are connected to the Bitcoin and Litecoin networks using `btcd` and `ltcd`. The guide follows the assumes that the reader has some lightning knowledge and is capable of setting up a simple network, fund wallets and open payment channels.
 
-# Terminal setting
-It is recommanded to open 5 terminals to be used with this PoC. Each of the following component should use its own terminal: `btcd`, `ltcd`, `lnd` (exchange A), `lnd` (exchange B), `lncli` (both exchanges). 
+# Describing the setup
 
+## Single Exchange setup
+Each exchange (A, B) is running several components which together provides full support for atomic swap between BTC and LTC:
+1. BTCD - full node, connected to the Bitcoin chain
+2. LTCD - full node, connected to the Litecoin chain
+3. LND-BTC - lightning network daemon for the BTC network
+4. LND-LTC - lightning network daemon for the LTC network
+5. XUD simulator 
+
+## Multiple Exchanges setup
+We are going to setup two exchanges on a single machine. For that we would need to run 2x5 processes. Luckily, we can share the BTCD and the LTCD between the two exchanges so we can set everything up using 8 processes. 
+
+Since everything is running on a single machine, we need to assign different working director and ports for each process. We will use the following schema:
+
+### directory/port allocation
+TBD
+
+### Terminal setting
+It is recommended to open 9 terminals to be used with this PoC, allowing each component to run in its own terminal with an additional terminal being used for commands (CLI) 
+
+# Installation 
 ## Install Lightning Dependencies
 Download latest `Go` package from [offical Go repository](https://golang.org/dl/) and uncompress to `/usr/local` .
 Alternativly you can use apt-get
@@ -27,12 +46,12 @@ $ go get -u github.com/Masterminds/glide
 
 ## Build Lightning Daemon
 
-Since the cross chain swaps was not yet merged into the official `lnd` master branch, we will use instead an xchain-swap enabled experimental `lnd` daemon. 
+Since cross chain swaps support was not yet merged into the official `lnd` master branch, we will use instead an xchain-swap enabled experimental `lnd` daemon. 
 
 #### Cross-chain swap enabled `lnd`
 To build and install the xchain-swap enabled experimental `lnd` daemon 
 ```shell
-$ git clone -b multi-chain-phase-2 https://github.com/offerm/lnd.git $GOPATH/src/github.com/lightningnetwork/lnd
+$ git clone -b resolver https://github.com/offerm/lnd.git $GOPATH/src/github.com/lightningnetwork/lnd
 $ cd $GOPATH/src/github.com/lightningnetwork/lnd
 $ make && make install
 ```
