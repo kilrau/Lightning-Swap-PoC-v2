@@ -2,7 +2,7 @@
 
 # Lightning nodes Setup
 
-Once we installed all components and we have Litecoin and Bitcoin synced with their blockchains we can set up `lnd` processes. We are going to setup two `lnd` processes for each exchange that we mimic (one for BTC and one for LTC). It will take the `lnd` processes some time to sync with the `btcd` and `ltcd` daemons. It is OK to setup the four `lnd`s in parallel.
+Once we installed all components and we have Litecoin and Bitcoin synced with their blockchains we can set up `lnd` and `swap-resolver` processes. We are going to setup two `lnd` processes and one `xud` for each exchange that we mimic (one for BTC and one for LTC). It will take the `lnd` processes some time to sync with the `btcd` and `ltcd` daemons. It is OK to setup the `lnd`s and `swap-resolver`s in parallel.
 
 ## aliases
 To make our life easier with lncli, it is recommanded to use aliases.
@@ -14,7 +14,7 @@ alias xb-lnd-btc='lncli --rpcserver=localhost:20001 '
 alias xb-lnd-ltc='lncli --rpcserver=localhost:20001 '
 ```
 
-`xb=lnd-btc` allows CLI command to exchange B LND for the BTC network
+`xb-lnd-btc` allows CLI commands to exchange B LND for the BTC network
 
 Add the aliases file from `$GOPATH/src/github.com/lofferm/swap-resolver` to ~/.bash_profile and source it. Now we can use these aliases to communicate with the 4 `lnd` processes without the need to type the needed CLI arguments. 
 
@@ -60,6 +60,14 @@ check progress with
 xa-lnd-ltc getinfo
 ```
 
+### Launch `swap-resolver`
+Open a terminal to set Exchange A's `xud` daemon
+```shell
+cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-a/xud/
+./start.bash
+```
+
+
 ## Exchange B
 ### Launch `lnd-btc`
 Open a terminal to set Exchange B's `lnd-btc` daemon
@@ -82,6 +90,12 @@ cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-b/lnd/ltc/
 check progress with
 ```shell
 xb-lnd-ltc getinfo
+```
+### Launch `swap-resolver`
+Open a terminal to set Exchange B's `xud` daemon
+```shell
+cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-b/xud/
+./start.bash
 ```
 
 
