@@ -10,7 +10,7 @@ To make our life easier with lncli, it is recommanded to use aliases.
 ```bash
 alias xa-lnd-btc='lncli --rpcserver=localhost:10002 '
 alias xa-lnd-ltc='lncli --rpcserver=localhost:10001 '
-alias xb-lnd-btc='lncli --rpcserver=localhost:20001 '
+alias xb-lnd-btc='lncli --rpcserver=localhost:20002 '
 alias xb-lnd-ltc='lncli --rpcserver=localhost:20001 '
 ```
 
