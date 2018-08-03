@@ -16,12 +16,12 @@ alias xb-lnd-ltc='lncli --rpcserver=localhost:20001 --no-macaroons'
 
 `xb-lnd-btc` allows CLI commands to exchange B LND for the BTC network
 
-Add the aliases file from `$GOPATH/src/github.com/lofferm/swap-resolver` to ~/.bash_profile or ~/.profile and source it. Now we can use these aliases to communicate with the 4 `lnd` processes without the need to type the needed CLI arguments. 
+Add the aliases file from `$GOPATH/src/github.com/offerm/swap-resolver` to ~/.bash_profile or ~/.profile and source it. Now we can use these aliases to communicate with the 4 `lnd` processes without the need to type the needed CLI arguments. 
 
 ## startup scripts
-To make life easier we prepared a directory structure under $GOPATH/src/github.com/lofferm/swap-resolver as follow:
+To make life easier we prepared a directory structure under $GOPATH/src/github.com/offerm/swap-resolver as follow:
 
-$GOPATH/src/github.com/lofferm/swap-resolver
+$GOPATH/src/github.com/offerm/swap-resolver
 *	exchange-a
 	+	lnd (resolve.conf)
 		*	btc (start.bash)
@@ -40,7 +40,7 @@ the `resolve.conf` is needed for the swap-resolver
 ### Launch `lnd-btc`
 Open a terminal to set Exchange A's `lnd-btc` daemon
 ```shell
-cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-a/lnd/btc/
+cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-a/lnd/btc/
 ./start.bash
 ```
 
@@ -51,7 +51,7 @@ xa-lnd-btc getinfo
 ### Launch `lnd-ltc`
 Open a terminal to set Exchange A's `lnd-ltc` daemon
 ```shell
-cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-a/lnd/ltc/
+cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-a/lnd/ltc/
 ./start.bash
 ```
 
@@ -63,7 +63,7 @@ xa-lnd-ltc getinfo
 ### Launch `swap-resolver`
 Open a terminal to set Exchange A's `xud` daemon
 ```shell
-cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-a/xud/
+cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-a/xud/
 ./start.bash
 ```
 
@@ -72,7 +72,7 @@ cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-a/xud/
 ### Launch `lnd-btc`
 Open a terminal to set Exchange B's `lnd-btc` daemon
 ```shell
-cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-b/lnd/btc/
+cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-b/lnd/btc/
 ./start.bash
 ```
 
@@ -83,7 +83,7 @@ xb-lnd-btc getinfo
 ### Launch `lnd-ltc`
 Open a terminal to set Exchange B's `lnd-ltc` daemon
 ```shell
-cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-b/lnd/ltc/
+cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-b/lnd/ltc/
 ./start.bash
 ```
 
@@ -94,7 +94,7 @@ xb-lnd-ltc getinfo
 ### Launch `swap-resolver`
 Open a terminal to set Exchange B's `xud` daemon
 ```shell
-cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-b/xud/
+cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-b/xud/
 ./start.bash
 ```
 
