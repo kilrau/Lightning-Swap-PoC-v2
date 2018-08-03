@@ -4,20 +4,52 @@
 
 Once we installed all components and we have Litecoin and Bitcoin synced with their blockchains we can set up `lnd` processes. We are going to setup two `lnd` processes for each exchange that we mimic (one for BTC and one for LTC). It will take the `lnd` processes some time to sync with the `btcd` and `ltcd` daemons. It is OK to setup the four `lnd`s in parallel.
 
-#
+## aliases
+To make our life easier with lncli, it is recommanded to use aliases.
+
+```bash
+alias xa-lnd-btc='lncli --rpcserver=localhost:10002 '
+alias xa-lnd-ltc='lncli --rpcserver=localhost:10001 '
+alias xb-lnd-btc='lncli --rpcserver=localhost:20001 '
+alias xb-lnd-ltc='lncli --rpcserver=localhost:20001 '
+```
+
+`xb=lnd-btc` allows CLI command to exchange B LND for the BTC network
+
+Add the aliases file from `$GOPATH/src/github.com/lofferm/swap-resolver` to ~/.bash_profile and source it. Now we can use these aliases to communicate with the 4 `lnd` processes without the need to type the needed CLI arguments. 
+
+## startup scripts
+To make life easier we prepared a directory structure under $GOPATH/src/github.com/lofferm/swap-resolver as follow:
+
+$GOPATH/src/github.com/lofferm/swap-resolver
+*	exchange-a
+	+	lnd (resolve.conf)
+		*	btc (start.bash)
+		*	ltc (start.bash)
+	+	xud (start.bash)
+*	exchange-b
+	+	lnd (resolve.conf)
+		*	btc (start.bash)
+		*	ltc (start.bash)
+	+	xud (start.bash)
+
+the `start.bash` script invokes the LND process using the right parameters (ports, etc).
+the `resolve.conf` is needed for the swap-resolver 
 
 ## Exchange A
-
-Open a terminal to set Exchange A's `lnd` daemon
-
-### Launch `lnd`
-Create a separate directory and launch `lnd` for Exchange A that uses both `Bitcoin` and `Litecoin` chains.
-Note that `--debughtlc` is currently mandatory for the success of a swap 
+### Launch `lnd-btc`
+Open a terminal to set Exchange A's `lnd-btc` daemon
 ```shell
-$ mkdir -p $HOME/exchange-a
-$ cd $HOME/exchange-a
-$ lnd --noencryptwallet --debughtlc --rpcport=10001 --peerport=10011 --restport=8001 --datadir=data --logdir=logs --debuglevel=debug --nobootstrap --no-macaroons --bitcoin.active --bitcoin.testnet --litecoin.active --litecoin.testnet --bitcoin.rpcuser=xu --bitcoin.rpcpass=xu --litecoin.rpcuser=xu --litecoin.rpcpass=xu
+cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-a/lnd/btc/
+./start.bash
+ecoin.rpcpass=xu
 ```
+
+check progress with
+```shell
+xa-lnd-btc getinfo
+```
+
 
 ## Exchange B
 
