@@ -123,13 +123,17 @@ Do that for all LNDs until you see all of them synced to chain.
 
 Query Exchange A wallet balances for both `Bitcoin` and `Litecoin` after creation (we expect to see zeros, right?)
 ```shell
-$ lncli --rpcserver=localhost:10001 --no-macaroons walletbalance --ticker=BTC
+$ xa-lnd-btc walletbalance
 {
-    "balance": "0"
+    "total_balance": "0",
+    "confirmed_balance": "0",
+    "unconfirmed_balance": "0"
 }
-$ lncli --rpcserver=localhost:10001 --no-macaroons walletbalance --ticker=LTC
+$ xa-lnd-ltc walletbalance
 {
-    "balance": "0"
+    "total_balance": "0",
+    "confirmed_balance": "0",
+    "unconfirmed_balance": "0"
 }
 ```
 
@@ -137,11 +141,11 @@ $ lncli --rpcserver=localhost:10001 --no-macaroons walletbalance --ticker=LTC
 
 Create Exchange A Segwit addresses for both `Bitcoin` and `Litecoin`
 ```shell
-$ lncli --rpcserver=localhost:10001 --no-macaroons newaddress np2wkh --ticker=BTC
+$ xa-lnd-btc newaddress np2wkh 
 {
         "address": "2NBRavXuXmbd73tRvgCAHhTiSuPoa3LqKdd"
 }
-$ lncli --rpcserver=localhost:10001 --no-macaroons newaddress np2wkh --ticker=LTC
+$ xa-lnd-ltc newaddress np2wkh 
 {
         "address": "2N2yE6ZbdxePtco8DuTSQVEJNsNg74KvGd3"
 }
@@ -153,22 +157,10 @@ Send some BTC (0.2 or more is great) and some LTC (10 is great) to Exchange A's 
 
 ## balance after funding the wallets
 
-Query Exchange A wallet balances for both `Bitcoin` and `Litecoin` after funding
-```shell
-$ lncli --rpcserver=localhost:10001 --no-macaroons walletbalance --ticker=BTC
-{
-        "balance": "32500000"
-}
-$ lncli --rpcserver=localhost:10001 --no-macaroons walletbalance --ticker=LTC
-{
-        "balance": "1000000000"
-}
-```
-
-
+Query Exchange A wallet balances for both `Bitcoin` and `Litecoin` after funding and make sure you see the amount as confirmed balance
 
 We are now ready with Exchange A's wallets. Note that Exchange B has LTC and BTC wallets but these are empty (zero balance). There is no need to fund Exchange B for our PoC. 
 
-We are now ready to move on to the next step and create the P2P `lnd` network.
+We are now ready to move on to the next step and create the P2P `lnd` networks.
 
 [ [index](/README.md), [previous](/LIGHTNING-00-install.md), [next](/LIGHTNING-02-connect.md) ]
