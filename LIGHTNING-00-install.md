@@ -41,7 +41,7 @@ Install `Glide`
 $ go get -u github.com/Masterminds/glide
 ```
 
-## The swap-resolver
+## Installing the swap-resolver
 You will need the swap-resolver to allow atomic swap across chains.  
 
 To install the swap-resolver 
