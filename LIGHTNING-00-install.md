@@ -44,6 +44,15 @@ Install `Glide`
 $ go get -u github.com/Masterminds/glide
 ```
 
+## The swap-resolver
+You will need the swap-resolver to allow atomic swap across chains.  
+
+To build and install the swap-resolver 
+```shell
+$ git clone -b resolver https://github.com/offerm/swap-resolver.git $GOPATH/src/github.com/offerm/swap-resolver
+```
+
+
 ## Build Lightning Daemon
 
 Since cross chain swaps support was not yet merged into the official `lnd` master branch, we will use instead an xchain-swap enabled experimental `lnd` daemon. 
@@ -99,6 +108,10 @@ Sync progress may be tracked as follows
 ```shell
 $ ltcctl --testnet  getinfo --rpcuser=xu --rpcpass=xu
 ```
+
+### Coffee time
+It will take some time for BTCD and LTCD to sync with the chains. Get a coffee.
+
 
 ## Running Lightning Daemon(s)
 Once testnet sync is done for the Bitcoin & Litecoin daemons, we continue to the next section which explains how to setup two lnd processes for Exchange-A and Exchange-B
