@@ -6,7 +6,7 @@ This guide can be used to perform an instant BTC<->LTC atomic swap between two e
 # Describing the setup
 
 ## Single Exchange setup
-Each exchange (A, B) is running several components which together provides full support for atomic swap between BTC and LTC:
+Each exchange (A, B) is running several components which together provide full support for atomic swap between BTC and LTC:
 1. BTCD - full node, connected to the Bitcoin chain
 2. LTCD - full node, connected to the Litecoin chain
 3. LND-BTC - lightning network daemon for the BTC network
@@ -16,10 +16,7 @@ Each exchange (A, B) is running several components which together provides full 
 ## Multiple Exchanges setup
 We are going to setup two exchanges on a single machine. For that we would need to run 2x5 processes. Luckily, we can share the BTCD and the LTCD between the two exchanges so we can set everything up using 8 processes. 
 
-Since everything is running on a single machine, we need to assign different working director and ports for each process. We will use the following schema:
-
-### directory/port allocation
-TBD
+Since everything is running on a single machine, we need to assign different working director and ports for each process. More aboit this later.
 
 ### Terminal setting
 It is recommended to open 9 terminals to be used with this PoC, allowing each component to run in its own terminal with an additional terminal being used for commands (CLI) 
@@ -47,11 +44,10 @@ $ go get -u github.com/Masterminds/glide
 ## The swap-resolver
 You will need the swap-resolver to allow atomic swap across chains.  
 
-To build and install the swap-resolver 
+To install the swap-resolver 
 ```shell
-$ git clone -b resolver https://github.com/offerm/swap-resolver.git $GOPATH/src/github.com/offerm/swap-resolver
+$ git clone https://github.com/offerm/swap-resolver.git $GOPATH/src/github.com/offerm/swap-resolver
 ```
-
 
 ## Build Lightning Daemon
 
@@ -59,6 +55,8 @@ Since cross chain swaps support was not yet merged into the official `lnd` maste
 
 #### Cross-chain swap enabled `lnd`
 To build and install the xchain-swap enabled experimental `lnd` daemon 
+
+Make sure you use the resolver branch which is critical for the swap.
 ```shell
 $ git clone -b resolver https://github.com/offerm/lnd.git $GOPATH/src/github.com/lightningnetwork/lnd
 $ cd $GOPATH/src/github.com/lightningnetwork/lnd
@@ -66,7 +64,7 @@ $ make && make install
 ```
 
 #### Bitcoin full node implementation `btcd`
-Build and install the `btcd` Bitcoin full node implementation
+If you don't have `btcd` set up, you will need to build and install the `btcd` Bitcoin full node implementation
 ```shell
 $ git clone https://github.com/roasbeef/btcd $GOPATH/src/github.com/roasbeef/btcd
 $ cd $GOPATH/src/github.com/roasbeef/btcd
@@ -75,7 +73,7 @@ $ go install . ./cmd/...
 ```
 
 #### Litecoin full node implementation `ltcd`
-Build and install the `ltcd` Litecoin full node implementation
+If you don't have `ltcd` set up, you will need to build and install the `ltcd` Litecoin full node implementation
 ```shell
 $ git clone https://github.com/ltcsuite/ltcd.git $GOPATH/src/github.com/ltcsuite/ltcd
 $ cd $GOPATH/src/github.com/ltcsuite/ltcd
