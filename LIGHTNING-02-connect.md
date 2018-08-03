@@ -6,22 +6,21 @@ In this step we connect Exchange A and Exchange B at network levels so they beco
 
 
 ## Establishing Connection
+First, we extract exchange B PUBKEYs so we can use them to set connections and channels
 ```shell
 $ XB_BTC_PUBKEY=`xb-lnd-btc getinfo|grep identity_pubkey|cut -d '"' -f 4`
 $ XB_LTC_PUBKEY=`xb-lnd-ltc getinfo|grep identity_pubkey|cut -d '"' -f 4`
-
-$ lncli --rpcserver=localhost:10002 --no-macaroons connect $X_A_ID_PUBKEY@127.0.0.1:10011
-{
-    "peer_id": 0
-}
 ```
 
 
-By using Exchange A's `identity_pubkey`, host and port number, Exchange B establishes a connection using the following command
+By using Exchange B's `identity_pubkey`, host and port number, Exchange A establishes connections using the following commands
 ```shell
-$ X_A_ID_PUBKEY=`lncli --rpcserver=localhost:10001 --no-macaroons getinfo|grep identity_pubkey|cut -d '"' -f 4`
+$ xa-lnd-btc connect $XB_BTC_PUBKEY@127.0.0.1:20012
+{
+    "peer_id": 0
+}
 
-$ lncli --rpcserver=localhost:10002 --no-macaroons connect $X_A_ID_PUBKEY@127.0.0.1:10011
+$ xa-lnd-ltc connect $XB_LTC_PUBKEY@127.0.0.1:20011
 {
     "peer_id": 0
 }
@@ -29,42 +28,38 @@ $ lncli --rpcserver=localhost:10002 --no-macaroons connect $X_A_ID_PUBKEY@127.0.
 
 ### Exchange A post-connection
 ```shell
-$ lncli --rpcserver=localhost:10001 --no-macaroons listpeers
+$ xa-lnd-btc listpeers
 {
-        "peers": [
-                {
-                        "pub_key": "0237cdf6b03cf17df8676af35b43da3ee0613b888bc5cd26a41064118f1241cc2f",
-                        "peer_id": 1,
-                        "address": "127.0.0.1:56624",
-                        "bytes_sent": "149",
-                        "bytes_recv": "149",
-                        "sat_sent": "0",
-                        "sat_recv": "0",
-                        "inbound": false,
-                        "ping_time": "0"
-                }
-        ]
+    "peers": [
+        {
+            "pub_key": "02fe35d3c066601c5e9f3f5de0972e0c0b3478661544c0d0eb6991355c3e676926",
+            "address": "127.0.0.1:62115",
+            "bytes_sent": "792",
+            "bytes_recv": "792",
+            "sat_sent": "17004",
+            "sat_recv": "0",
+            "inbound": true,
+            "ping_time": "618"
+        }
+    ]
 }
-```
 
-### Exchange B post-connection
-```shell
-$ lncli --rpcserver=localhost:10002 --no-macaroons listpeers
+$ xa-lnd-ltc listpeers
 {
-        "peers": [
-                {
-                        "pub_key": "026374581ff7974975ffce20e65a04876ba33405502d1a13dc73c9a702b61aef31",
-                        "peer_id": 1,
-                        "address": "127.0.0.1:10011",
-                        "bytes_sent": "149",
-                        "bytes_recv": "149",
-                        "sat_sent": "0",
-                        "sat_recv": "0",
-                        "inbound": true,
-                        "ping_time": "0"
-                }
-        ]
+    "peers": [
+        {
+            "pub_key": "02ac744ae30f0e7c1d624221428e7f015ee921e557ef2c6199b7dd983a85d2b014",
+            "address": "127.0.0.1:20011",
+            "bytes_sent": "792",
+            "bytes_recv": "792",
+            "sat_sent": "0",
+            "sat_recv": "1700006",
+            "inbound": false,
+            "ping_time": "465"
+        }
+    ]
 }
+
 ```
 
 We are no ready to set up payment channels. 
