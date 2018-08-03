@@ -47,6 +47,7 @@ You will need the swap-resolver to allow atomic swap across chains.
 To install the swap-resolver 
 ```shell
 $ git clone https://github.com/offerm/swap-resolver.git $GOPATH/src/github.com/offerm/swap-resolver
+$ dep ensure
 ```
 
 ## Build Lightning Daemon
