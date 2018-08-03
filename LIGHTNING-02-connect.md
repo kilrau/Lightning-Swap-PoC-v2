@@ -17,12 +17,12 @@ By using Exchange B's `identity_pubkey`, host and port number, Exchange A establ
 ```shell
 $ xa-lnd-btc connect $XB_BTC_PUBKEY@127.0.0.1:20012
 {
-    "peer_id": 0
+
 }
 
 $ xa-lnd-ltc connect $XB_LTC_PUBKEY@127.0.0.1:20011
 {
-    "peer_id": 0
+ 
 }
 ```
 
@@ -32,14 +32,14 @@ $ xa-lnd-btc listpeers
 {
     "peers": [
         {
-            "pub_key": "02fe35d3c066601c5e9f3f5de0972e0c0b3478661544c0d0eb6991355c3e676926",
-            "address": "127.0.0.1:62115",
-            "bytes_sent": "792",
-            "bytes_recv": "792",
-            "sat_sent": "17004",
+            "pub_key": "022b74059a18bb77c6c906377e92023cc40ae9695920df0d056fc95f135221e69f",
+            "address": "127.0.0.1:20012",
+            "bytes_sent": "279",
+            "bytes_recv": "279",
+            "sat_sent": "0",
             "sat_recv": "0",
-            "inbound": true,
-            "ping_time": "618"
+            "inbound": false,
+            "ping_time": "0"
         }
     ]
 }
@@ -48,14 +48,14 @@ $ xa-lnd-ltc listpeers
 {
     "peers": [
         {
-            "pub_key": "02ac744ae30f0e7c1d624221428e7f015ee921e557ef2c6199b7dd983a85d2b014",
+            "pub_key": "021be8d225008d415eaa9b64da60926dfc197e9139deb0f09bae09603352878b5c",
             "address": "127.0.0.1:20011",
-            "bytes_sent": "792",
-            "bytes_recv": "792",
+            "bytes_sent": "137",
+            "bytes_recv": "137",
             "sat_sent": "0",
-            "sat_recv": "1700006",
+            "sat_recv": "0",
             "inbound": false,
-            "ping_time": "465"
+            "ping_time": "0"
         }
     ]
 }
