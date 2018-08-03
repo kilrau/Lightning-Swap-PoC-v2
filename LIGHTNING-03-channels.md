@@ -7,7 +7,7 @@
 ```shell
 $ xa-lnd-btc openchannel --node_key=$XB_BTC_PUBKEY --local_amt=16000000 --push_amt=3000000
 {
-        "funding_txid": "1f40907fc1968319cbb57955e06c7b11d4f3b9d413c633c1ca26288b9d2e033b"
+        "funding_txid": "923d61a3cfd4a154ae6778952b87ab83842f87e4cac7c6e9beb08ac6344f567f"
 }
 ```
 
@@ -15,33 +15,75 @@ The funding transaction must be confirmed before a channel is opened. The defaul
 
 Until confirmed, the pending channels can be seen with the `pendingchannels` command
 ```shell
-$ xa-lnd-btc openchannel pendingchannels --ticker=BTC
+$ xa-lnd-btc  pendingchannels
 ```
 
 Once the channel is opened, Exchange A lists the `Bitcoin` payment channel as follows
 ```shell
 $ xa-lnd-btc listchannels
-
-ADD HERE
-
+{
+    "channels": [
+        {
+            "active": true,
+            "remote_pubkey": "022b74059a18bb77c6c906377e92023cc40ae9695920df0d056fc95f135221e69f",
+            "channel_point": "923d61a3cfd4a154ae6778952b87ab83842f87e4cac7c6e9beb08ac6344f567f:0",
+            "chan_id": "1512677311173165056",
+            "capacity": "16000000",
+            "local_balance": "12977556",
+            "remote_balance": "3000000",
+            "commit_fee": "22444",
+            "commit_weight": "724",
+            "fee_per_kw": "31000",
+            "unsettled_balance": "0",
+            "total_satoshis_sent": "0",
+            "total_satoshis_received": "0",
+            "num_updates": "0",
+            "pending_htlcs": [
+            ],
+            "csv_delay": 1922,
+            "private": false
+        }
+    ]
+}
 ```
 
 
 
 ## Exchange A opens a 0.1 LTC payment channel to Exchange B and pushes 0.05 LTC to Exchange B
-
+```shell
 $ xa-lnd-ltc openchannel --node_key=$XB_LTC_PUBKEY --local_amt=10000000 --push_amt=5000000 
 {
-        "funding_txid": "3c5b1d738e251819f0eaf263e73eb268e73a2d231e5da00cdfada76b3c66e8f7"
+        "funding_txid": "e217a814b2f360050b6548acf042c7375d78588aeeee91fc44096d24174dd724"
 }
 ```
 
 Until confirmed, Exchange B list the new channel as pending channel.
 ```shell
 $ xb-lnd-ltc pendingchannels
-
-ADD HERE
-
+{
+    "total_limbo_balance": "0",
+    "pending_open_channels": [
+        {
+            "channel": {
+                "remote_node_pub": "030dc387fecfe056dcc5ed1043a4d7d1f6b1e712e1a5cc3cc57f2ff031df6ab33e",
+                "channel_point": "e217a814b2f360050b6548acf042c7375d78588aeeee91fc44096d24174dd724:0",
+                "capacity": "10000000",
+                "local_balance": "5000000",
+                "remote_balance": "4995475"
+            },
+            "confirmation_height": 0,
+            "commit_fee": "4525",
+            "commit_weight": "724",
+            "fee_per_kw": "6250"
+        }
+    ],
+    "pending_closing_channels": [
+    ],
+    "pending_force_closing_channels": [
+    ],
+    "waiting_close_channels": [
+    ]
+}
 ```
 
 Once confirmed, Exchange B lists the `Litecoin` payment channel as follows
