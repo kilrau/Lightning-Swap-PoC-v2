@@ -1,7 +1,7 @@
 [ [index](/README.md), [next](/LIGHTNING-01-peers.md) ]
 
 # Lightning
-This guide can be used to perform an instant BTC<->LTC atomic swap between two exchanges A & B on the lightning network. The exchanges are running the lightning network daemon (`lnd`) and are connected to the Bitcoin and Litecoin networks using `btcd` and `ltcd`. The guide follows the assumes that the reader has some lightning knowledge and is capable of setting up a simple network, fund wallets and open payment channels.
+This guide can be used to perform an instant BTC<->LTC atomic swap between two exchanges A & B on the lightning network. The exchanges are running the lightning network daemon (`lnd`) and are connected to the Bitcoin and Litecoin networks using `btcd` and `ltcd`. The guide assumes that the reader has some lightning knowledge and is capable of setting up a simple network, fund wallets and open payment channels.
 
 # Describing the setup
 
