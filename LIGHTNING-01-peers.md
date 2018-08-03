@@ -42,73 +42,80 @@ Open a terminal to set Exchange A's `lnd-btc` daemon
 ```shell
 cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-a/lnd/btc/
 ./start.bash
-ecoin.rpcpass=xu
 ```
 
 check progress with
 ```shell
 xa-lnd-btc getinfo
 ```
+### Launch `lnd-ltc`
+Open a terminal to set Exchange A's `lnd-ltc` daemon
+```shell
+cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-a/lnd/ltc/
+./start.bash
+```
 
+check progress with
+```shell
+xa-lnd-ltc getinfo
+```
 
 ## Exchange B
-
-Open another terminal to set Exchange B's `lnd` deamon
-
-### Launch `lnd`
-Create a separate directory and launch `lnd` for Exchange B that uses both `Bitcoin` and `Litecoin` chains. Keep in mind that `--debughtlc` is currently mandatory for the Poc.
+### Launch `lnd-btc`
+Open a terminal to set Exchange B's `lnd-btc` daemon
 ```shell
-$ mkdir -p $HOME/exchange-b
-$ cd $HOME/exchange-b
-$ lnd --noencryptwallet --debughtlc --rpcport=10002 --peerport=10012 --restport=8002 --datadir=data --logdir=logs --debuglevel=debug --nobootstrap --no-macaroons --bitcoin.active --bitcoin.testnet --litecoin.active --litecoin.testnet --bitcoin.rpcuser=xu --bitcoin.rpcpass=xu --litecoin.rpcuser=xu --litecoin.rpcpass=xu
+cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-b/lnd/btc/
+./start.bash
 ```
+
+check progress with
+```shell
+xb-lnd-btc getinfo
+```
+### Launch `lnd-ltc`
+Open a terminal to set Exchange B's `lnd-ltc` daemon
+```shell
+cd $GOPATH/src/github.com/lofferm/swap-resolver/exchange-b/lnd/ltc/
+./start.bash
+```
+
+check progress with
+```shell
+xb-lnd-ltc getinfo
+```
+
+
 ## Wait until Exchange A and Exchange B are synced
 
-Give the two `lnd` the time they need to sync with `btcd` and `ltcd`. You can check the status by using the `getinfo` command (use the cli terminal for this). You would want to see `"synced_to_chain": true,` for both exchanges.
+Give the four `lnd` the time they need to sync with `btcd` and `ltcd`. You can check the status by using the `getinfo` command (use the cli terminal for this). You would want to see `"synced_to_chain": true,` for all process exchanges.
 
-## Check status 
+### Check status 
 
-Check status of Exchange A
-
-```shell
-$ lncli --rpcserver=localhost:10001 --no-macaroons getinfo
-{
-        "identity_pubkey": "026374581ff7974975ffce20e65a04876ba33405502d1a13dc73c9a702b61aef31",
-        "alias": "",
-        "num_pending_channels": 0,
-        "num_active_channels": 0,
-        "num_peers": 0,
-        "block_height": 1318976,
-        "block_hash": "0000000000000edb9491ddb942b9afcfee44ddc8dc3fdab293701307483b1771",
-        "synced_to_chain": true,
-        "testnet": true,
-        "chains": [
-                "litecoin",
-                "bitcoin"
-        ]
-}
-```
-
-Check status of Exchange B
+example - Check status of Exchange A
 
 ```shell
-$ lncli --rpcserver=localhost:10002 --no-macaroons getinfo
+$ xa-lnd-btc getinfo
 {
-    "identity_pubkey": "0248a05db7c3996df2699fca9a9a1f843c723b50a6178e805416150b199b5c44bc",
-    "alias": "",
+    "identity_pubkey": "035e3d3884e9a26dcd238b2b2d1ef608a31888365fed327b4af563671a2ee49bb6",
+    "alias": "035e3d3884e9a26dcd23",
     "num_pending_channels": 0,
-    "num_active_channels": 0,
-    "num_peers": 0,
-    "block_height": 1256431,
-    "block_hash": "000000000000015571221c48ec7e6a48ddbaeba29d38da5b40fb06639677a4ab",
+    "num_active_channels": 1,
+    "num_peers": 1,
+    "block_height": 1356729,
+    "block_hash": "00000000007dd1ef9454e52b3986b939ed91b7f81587c95ff0921977be316114",
     "synced_to_chain": true,
     "testnet": true,
     "chains": [
-	"litecoin",
-	"bitcoin"
-    ]
+        "bitcoin"
+    ],
+    "uris": [
+    ],
+    "best_header_timestamp": "1533285232",
+    "version": "0.4.2-beta commit=6a8368a632d22762299686f7ea94eb777a5887c8"
 }
 ```
+
+Do that for all LNDs until you see all of them synced to chain.
 
 # Fund Exchange A by using faucets 
 
