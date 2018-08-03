@@ -4,6 +4,16 @@
 
 Now that we have everything setup, we can execute swaps.
 
+## Balance before the swap
+
+Before we execute the swap lets record the BTC and LTC channel balances on exchange A and B (check `local_balance` and `remote_balance`)
+
+```shell
+```
+
+
+## Now swap
+
 Lets assume exchange B is the maker and exchange A is the Taker.
 The Maker is willing to sell 10000 LTC for 100 BTC
 
@@ -18,6 +28,8 @@ $go run cmd/xucli/main.go --rpcserver localhost:7001 takeorder --order_id=123 --
 2018/08/03 13:04:08 Swap completed successfully.
   Swap preImage is  390eea9e6a67d1506bc4c334ed35c3ac3d84c6e856019424740bc52d16490b6e 
 ```
+
+## Balance after the swap
 
 Let's see the impact in the channels (check `local_balance` and `remote_balance`)
 ```shell
