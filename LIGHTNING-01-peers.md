@@ -8,15 +8,15 @@ Once we installed all components and we have Litecoin and Bitcoin synced with th
 To make our life easier with lncli, it is recommanded to use aliases.
 
 ```bash
-alias xa-lnd-btc='lncli --rpcserver=localhost:10002 '
-alias xa-lnd-ltc='lncli --rpcserver=localhost:10001 '
-alias xb-lnd-btc='lncli --rpcserver=localhost:20002 '
-alias xb-lnd-ltc='lncli --rpcserver=localhost:20001 '
+alias xa-lnd-btc='lncli --rpcserver=localhost:10002 --no-macaroons'
+alias xa-lnd-ltc='lncli --rpcserver=localhost:10001 --no-macaroons'
+alias xb-lnd-btc='lncli --rpcserver=localhost:20002 --no-macaroons'
+alias xb-lnd-ltc='lncli --rpcserver=localhost:20001 --no-macaroons'
 ```
 
 `xb-lnd-btc` allows CLI commands to exchange B LND for the BTC network
 
-Add the aliases file from `$GOPATH/src/github.com/lofferm/swap-resolver` to ~/.bash_profile and source it. Now we can use these aliases to communicate with the 4 `lnd` processes without the need to type the needed CLI arguments. 
+Add the aliases file from `$GOPATH/src/github.com/lofferm/swap-resolver` to ~/.bash_profile or ~/.profile and source it. Now we can use these aliases to communicate with the 4 `lnd` processes without the need to type the needed CLI arguments. 
 
 ## startup scripts
 To make life easier we prepared a directory structure under $GOPATH/src/github.com/lofferm/swap-resolver as follow:
