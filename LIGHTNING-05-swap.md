@@ -74,55 +74,68 @@ $ cd $GOPATH/src/github.com/offerm/swap-resolver
 
 $go run cmd/xucli/main.go --rpcserver localhost:7001 takeorder --order_id=123 --maker_amount 100 --maker_coin BTC --taker_amount 10000 --taker_coin=LTC
 
-2018/08/03 13:04:07 Starting takeOrder command -  (*swapresolver.TakeOrderReq)(0xc4200a9c80)(orderid:"123" taker_amount:10000 taker_coin:LTC maker_amount:100 )
-2018/08/03 13:04:08 Swap completed successfully.
-  Swap preImage is  390eea9e6a67d1506bc4c334ed35c3ac3d84c6e856019424740bc52d16490b6e 
+2018/08/03 20:57:35 Starting takeOrder command -  (*swapresolver.TakeOrderReq)(0xc4200a5c80)(orderid:"123" taker_amount:10000 taker_coin:LTC maker_amount:100 )
+2018/08/03 20:57:36 Swap completed successfully.
+  Swap preImage is  c7256829d2a731c76f98a08fae6f40965fc642d417d8c8249d0d560830d93217 
 ```
 
 ## Balance after the swap
 
 Let's see the impact in the channels (check `local_balance` and `remote_balance`)
 ```shell
-$  lncli --rpcserver=localhost:10001 --no-macaroons listchannels
+$ xa-lnd-btc listchannels
 {
-        "channels": [
-                {
-                        "active": true,
-                        "remote_pubkey": "0237cdf6b03cf17df8676af35b43da3ee0613b888bc5cd26a41064118f1241cc2f",
-                        "channel_point": "1f40907fc1968319cbb57955e06c7b11d4f3b9d413c633c1ca26288b9d2e033b:0",
-                        "chan_id": "1450271230199529472",
-                        "capacity": "16000000",
-                        "local_balance": "15895312",
-                        "remote_balance": "96000",
-                        "commit_fee": "8688",
-                        "commit_weight": "724",
-                        "fee_per_kw": "12000",
-                        "unsettled_balance": "0",
-                        "total_satoshis_sent": "101000",
-                        "total_satoshis_received": "5000",
-                        "num_updates": "8",
-                        "pending_htlcs": []
-                },
-                {
-                        "active": true,
-                        "remote_pubkey": "0237cdf6b03cf17df8676af35b43da3ee0613b888bc5cd26a41064118f1241cc2f",
-                        "channel_point": "3c5b1d738e251819f0eaf263e73eb268e73a2d231e5da00cdfada76b3c66e8f7:0",
-                        "chan_id": "649885039294873600",
-                        "capacity": "10000000",
-                        "local_balance": "5063800",
-                        "remote_balance": "4900000",
-                        "commit_fee": "36200",
-                        "commit_weight": "724",
-                        "fee_per_kw": "50000",
-                        "unsettled_balance": "0",
-                        "total_satoshis_sent": "0",
-                        "total_satoshis_received": "100000",
-                        "num_updates": "2",
-                        "pending_htlcs": []
-                }
-        ]
+    "channels": [
+        {
+            "active": true,
+            "remote_pubkey": "022b74059a18bb77c6c906377e92023cc40ae9695920df0d056fc95f135221e69f",
+            "channel_point": "246c05860d1589898f9a22317915c935b021a198ae93c1eacc6fc835ca96b5ac:0",
+            "chan_id": "1513035751963164672",
+            "capacity": "16000000",
+            "local_balance": "12977456",
+            "remote_balance": "3000100",
+            "commit_fee": "22444",
+            "commit_weight": "724",
+            "fee_per_kw": "31000",
+            "unsettled_balance": "0",
+            "total_satoshis_sent": "100",
+            "total_satoshis_received": "0",
+            "num_updates": "2",
+            "pending_htlcs": [
+            ],
+            "csv_delay": 1922,
+            "private": false
+        }
+    ]
+}
+$ xa-lnd-ltc listchannels
+{
+    "channels": [
+        {
+            "active": true,
+            "remote_pubkey": "021be8d225008d415eaa9b64da60926dfc197e9139deb0f09bae09603352878b5c",
+            "channel_point": "e217a814b2f360050b6548acf042c7375d78588aeeee91fc44096d24174dd724:0",
+            "chan_id": "757450261840068608",
+            "capacity": "10000000",
+            "local_balance": "5005475",
+            "remote_balance": "4990000",
+            "commit_fee": "4525",
+            "commit_weight": "724",
+            "fee_per_kw": "6250",
+            "unsettled_balance": "0",
+            "total_satoshis_sent": "0",
+            "total_satoshis_received": "10000",
+            "num_updates": "2",
+            "pending_htlcs": [
+            ],
+            "csv_delay": 576,
+            "private": false
+        }
+    ]
 }
 ```
+
+100 Sat more, 10000 Lat less.
 
 Done!!!!
 
