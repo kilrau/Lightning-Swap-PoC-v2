@@ -173,6 +173,21 @@ Send some BTC (0.2 or more is great) and some LTC (10 is great) to Exchange A's 
 
 Query Exchange A wallet balances for both `Bitcoin` and `Litecoin` after funding and make sure you see the amount as confirmed balance
 
+```shell
+$ xa-lnd-btc walletbalance
+{
+    "total_balance": "130000000",
+    "confirmed_balance": "130000000",
+    "unconfirmed_balance": "0"
+}
+$ xa-lnd-ltc walletbalance
+{
+    "total_balance": "1000000000",
+    "confirmed_balance": "1000000000",
+    "unconfirmed_balance": "0"
+}
+```
+
 We are now ready with Exchange A's wallets. Note that Exchange B has LTC and BTC wallets but these are empty (zero balance). There is no need to fund Exchange B for our PoC. 
 
 We are now ready to move on to the next step and create the P2P `lnd` networks.
