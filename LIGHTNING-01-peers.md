@@ -2,7 +2,9 @@
 
 # Lightning nodes Setup
 
-Once we installed all components and we have Litecoin and Bitcoin synced with their blockchains we can set up `lnd` processes. We are going to setup two processes that mimic two exchanges. We suggest to run each `lnd` process in its own terminal and use another terminal with lncli. It will take the `lnd` processes some time to sync with the `btcd` and `ltcd` daemons. It is OK to setup the two `lnd`s in parallel.
+Once we installed all components and we have Litecoin and Bitcoin synced with their blockchains we can set up `lnd` processes. We are going to setup two `lnd` processes for each exchange that we mimic (one for BTC and one for LTC). It will take the `lnd` processes some time to sync with the `btcd` and `ltcd` daemons. It is OK to setup the four `lnd`s in parallel.
+
+#
 
 ## Exchange A
 
