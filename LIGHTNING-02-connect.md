@@ -1,19 +1,19 @@
-[ [index](/README.md), [previous](/LIGHTNING-01-peers.md), [next](/LIGHTNING-03-channels.md) ]
+[ [index](/README.md) | [<- previous](/LIGHTNING-01-peers.md) / [next ->](/LIGHTNING-03-channels.md) ]
 
 # Lightning Peer Connection
-In this step we connect Exchange A and Exchange B at network levels so they become peers of each other. We make 2 parallel P2P networks, one for BTC and one for LTC.    
-
-
+In this step we connect Exchange A and Exchange B on network level so they become peers of each other. We create two parallel P2P networks, one for BTC and one for LTC.    
 
 ## Establishing Connection
-First, we extract exchange B PUBKEYs so we can use them to set connections and channels
+First, we extract Exchange B's pubKeys, so we can use them to set connections and channels
+
 ```shell
 $ XB_BTC_PUBKEY=`xb-lnd-btc getinfo|grep identity_pubkey|cut -d '"' -f 4`
 $ XB_LTC_PUBKEY=`xb-lnd-ltc getinfo|grep identity_pubkey|cut -d '"' -f 4`
 ```
 
 
-By using Exchange B's `identity_pubkey`, host and port number, Exchange A establishes connections using the following commands
+By using Exchange B's `identity_pubkey`, host and port number, Exchange A establishes two connections, using the following commands
+
 ```shell
 $ xa-lnd-btc connect $XB_BTC_PUBKEY@127.0.0.1:20012
 {
@@ -64,4 +64,4 @@ $ xa-lnd-ltc listpeers
 
 We are no ready to set up payment channels. 
 
-[ [index](/README.md), [previous](/LIGHTNING-01-peers.md), [next](/LIGHTNING-03-channels.md) ]
+[ [index](/README.md) | [<- previous](/LIGHTNING-01-peers.md) / [next ->](/LIGHTNING-03-channels.md) ]

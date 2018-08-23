@@ -1,27 +1,25 @@
-[ [index](/README.md), [previous](/LIGHTNING-00-install.md), [next](/LIGHTNING-02-connect.md) ]
+[ [index](/README.md) | [<- previous](/LIGHTNING-00-install.md) / [next ->](/LIGHTNING-02-connect.md) ]
 
 # Lightning nodes Setup
 
-Once we installed all components and we have Litecoin and Bitcoin synced with their blockchains we can set up `lnd` and `swap-resolver` processes. We are going to setup two `lnd` processes and one `xud` for each exchange that we mimic (one for BTC and one for LTC). It will take the `lnd` processes some time to sync with the `btcd` and `ltcd` daemons. It is OK to setup the `lnd`s and `swap-resolver`s in parallel.
+Once we installed all components and the Bitcoin & Litecoin testnet blockchains are synced, we can set up the `lnd` and `swap-resolver` processes. We are going to setup two `swap-resolver` processes, simulating two exchanges A & B running `xud` and four `lnd` processes, one for BTC and one for LTC for each exchange. It takes some time until `lnd` synced with the `btcd` and `ltcd` daemons. It is OK to setup the `lnd`s and `swap-resolver`s in parallel.
 
-## aliases
-To make our life easier with lncli, it is recommanded to use aliases.
+## Aliases
+To make our life easier with `lncli`, we recommend setting up aliases. Add the following to to `~/.bash_profile` or `~/.profile` and source it:
 
 ```bash
+#Adding lncli aliases
 alias xa-lnd-btc='lncli --rpcserver=localhost:10002 --no-macaroons'
 alias xa-lnd-ltc='lncli --rpcserver=localhost:10001 --no-macaroons'
 alias xb-lnd-btc='lncli --rpcserver=localhost:20002 --no-macaroons'
 alias xb-lnd-ltc='lncli --rpcserver=localhost:20001 --no-macaroons'
 ```
 
-`xb-lnd-btc` allows CLI commands to exchange B LND for the BTC network
+Now we can use these aliases to communicate with the 4 `lnd` processes without the need to type long CLI arguments.
 
-Add the aliases file from `$GOPATH/src/github.com/offerm/swap-resolver` to ~/.bash_profile or ~/.profile and source it. Now we can use these aliases to communicate with the 4 `lnd` processes without the need to type the needed CLI arguments. 
+## Startup Scripts
+To make life even easier, we find the following directory structure in `$GOPATH/src/github.com/offerm/swap-resolver`:
 
-## startup scripts
-To make life easier we prepared a directory structure under $GOPATH/src/github.com/offerm/swap-resolver as follow:
-
-$GOPATH/src/github.com/offerm/swap-resolver
 *	exchange-a
 	+	lnd (resolve.conf)
 		*	btc (start.bash)
@@ -33,8 +31,7 @@ $GOPATH/src/github.com/offerm/swap-resolver
 		*	ltc (start.bash)
 	+	xud (start.bash)
 
-the `start.bash` script invokes the LND process using the right parameters (ports, etc).
-the `resolve.conf` is needed for the swap-resolver 
+The `start.bash` script invokes the LND process using the right parameters (ports, etc). The `resolve.conf` is needed for the swap-resolver to function. Just FYI, no need to do anything for now.
 
 ## Exchange A
 ### Launch `lnd-btc`
@@ -99,16 +96,16 @@ cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-b/xud/
 ```
 
 
-## Wait until Exchange A and Exchange B are synced
+## Coffee time v2
 
-Give the four `lnd` the time they need to sync with `btcd` and `ltcd`. You can check the status by using the `getinfo` command (use the cli terminal for this). You would want to see `"synced_to_chain": true,` for all process exchanges.
+Give the four `lnd`s some time to sync with `btcd` and `ltcd`. You can check the status by using the `getinfo` command (use the cli terminal for this). You would want to see `"synced_to_chain": true,` for all four `lnd`s.
 
 ### Check status 
 
-example - Check status of Exchange A
+Example - Check the status of Exchange A's `lnd-btc`:
 
 ```shell
-$ xa-lnd-btc getinfo
+xa-lnd-btc getinfo
 {
     "identity_pubkey": "035e3d3884e9a26dcd238b2b2d1ef608a31888365fed327b4af563671a2ee49bb6",
     "alias": "035e3d3884e9a26dcd23",
@@ -129,13 +126,12 @@ $ xa-lnd-btc getinfo
 }
 ```
 
-Do that for all LNDs until you see all of them synced to chain.
 
-# Fund Exchange A by using faucets 
+# Fund Exchange A
 
-## balance after creating
+## Balance after creating
 
-Query Exchange A wallet balances for both `Bitcoin` and `Litecoin` after creation (we expect to see zeros, right?)
+Query Exchange A wallet balances for both `Bitcoin` and `Litecoin` after creation (we expect to see zeros!)
 ```shell
 $ xa-lnd-btc walletbalance
 {
@@ -153,7 +149,7 @@ $ xa-lnd-ltc walletbalance
 
 ## Create BTC and LTC addresses for deposit
 
-Create Exchange A Segwit addresses for both `Bitcoin` and `Litecoin`
+Create Segwit addresses for both, `bitcoin` and `litecoin`
 ```shell
 $ xa-lnd-btc newaddress np2wkh 
 {
@@ -165,13 +161,13 @@ $ xa-lnd-ltc newaddress np2wkh
 }
 ```
 
-## Use addresses to fund Exchange A's wallets
+## Send some money
 
-Send some BTC (0.2 or more is great) and some LTC (10 is great) to Exchange A's addresses via testnet faucets (see [README.bitcoin](README.bitcoin.md/#bitcoin-testnet-faucet) and [README.litecoin](README.litecoin.md/#litecoin-testnet-faucet)). Balances should appear in the wallet once the BTC/LTC transactions are mined.
+Send some BTC (0.2 or more is great) and some LTC (10 is great) to Exchange A's addresses via testnet faucets (see [README.bitcoin](README.bitcoin.md/#bitcoin-testnet-faucet) and [README.litecoin](README.litecoin.md/#litecoin-testnet-faucet)). Balances should appear in the wallet once the transactions are confirmed.
 
-## balance after funding the wallets
+## Balance after funding the wallets
 
-Query Exchange A wallet balances for both `Bitcoin` and `Litecoin` after funding and make sure you see the amount as confirmed balance
+Query Exchange A wallet balances for both `bitcoin` and `litecoin` after funding and make sure you see the amount as confirmed balance
 
 ```shell
 $ xa-lnd-btc walletbalance
@@ -188,8 +184,8 @@ $ xa-lnd-ltc walletbalance
 }
 ```
 
-We are now ready with Exchange A's wallets. Note that Exchange B has LTC and BTC wallets but these are empty (zero balance). There is no need to fund Exchange B for our PoC. 
+We are now ready with Exchange A's wallets. Exchange B is left with zero balance wallets and this is fine for now. There is no need to separately fund Exchange B's wallets for our PoC, it will get funds in the channel setup [later](/LIGHTNING-03-channels.md). 
 
-We are now ready to move on to the next step and create the P2P `lnd` networks.
+We are now ready to move on to the next step and connect our `lnd` instances.
 
-[ [index](/README.md), [previous](/LIGHTNING-00-install.md), [next](/LIGHTNING-02-connect.md) ]
+[ [index](/README.md) | [<- previous](/LIGHTNING-00-install.md) / [next ->](/LIGHTNING-02-connect.md) ]

@@ -1,8 +1,10 @@
-[ [index](/README.md), [previous](/LIGHTNING-02-connect.md), [next](/LIGHTNING-04-payment.md) ]
+[ [index](/README.md) | [<- previous](/LIGHTNING-02-connect.md) / [next ->](/LIGHTNING-04-swap.md) ]
 
 # Lightning Payment Channels
 
-## Exchange A opens 0.16 BTC payment channel to Exchange B pushing 0.3 BTC to exchange B
+## Bitcoin
+
+Exchange A opens a bitcoin payment channel to Exchange B and pushes over 0.3 BTC at the same time. Exchange B finally got some bitcoin, yay!
 
 ```shell
 $ xa-lnd-btc openchannel --node_key=$XB_BTC_PUBKEY --local_amt=16000000 --push_amt=3000000
@@ -11,9 +13,10 @@ $ xa-lnd-btc openchannel --node_key=$XB_BTC_PUBKEY --local_amt=16000000 --push_a
 }
 ```
 
-The funding transaction must be confirmed before a channel is opened. The default number of confirmations is 1.
+The funding transaction must be confirmed for the channel to be opened. The default number of confirmations is 1.
 
 Until confirmed, the pending channels can be seen with the `pendingchannels` command
+
 ```shell
 $ xa-lnd-btc  pendingchannels
 {
@@ -42,7 +45,8 @@ $ xa-lnd-btc  pendingchannels
 }
 ```
 
-Once the channel is opened, Exchange A lists the `Bitcoin` payment channel as follows
+Once the channel is opened, Exchange A lists the bitcoin payment channel as follows
+
 ```shell
 $ xa-lnd-btc listchannels
 {
@@ -73,7 +77,10 @@ $ xa-lnd-btc listchannels
 
 
 
-## Exchange A opens a 0.1 LTC payment channel to Exchange B and pushes 0.05 LTC to Exchange B
+## Litecoin
+
+Exchange A opens a litecoin payment channel to Exchange B and pushes over 0.1 LTC. Exchange B got some litecoin!
+
 ```shell
 $ xa-lnd-ltc openchannel --node_key=$XB_LTC_PUBKEY --local_amt=10000000 --push_amt=5000000 
 {
@@ -81,7 +88,7 @@ $ xa-lnd-ltc openchannel --node_key=$XB_LTC_PUBKEY --local_amt=10000000 --push_a
 }
 ```
 
-Until confirmed, Exchange B list the new channel as pending channel.
+Until confirmed, Exchange B lists the new channel as pending channel.
 ```shell
 $ xb-lnd-ltc pendingchannels
 {
@@ -110,7 +117,7 @@ $ xb-lnd-ltc pendingchannels
 }
 ```
 
-Once confirmed, Exchange B lists the `Litecoin` payment channel as follows
+Once confirmed, Exchange B lists the litecoin payment channel as follows
 ```shell
 $ xb-lnd-ltc listchannels
 {
@@ -139,7 +146,6 @@ $ xb-lnd-ltc listchannels
 }
 ```
 
-## Let's move on!
+## Let's move on and swap!
 
-[ [index](/README.md), [previous](/LIGHTNING-02-connect.md), [next](/LIGHTNING-04-payment.md) ]
-
+[ [index](/README.md) | [<- previous](/LIGHTNING-02-connect.md) / [next ->](/LIGHTNING-04-swap.md) ]

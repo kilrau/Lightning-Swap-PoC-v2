@@ -1,12 +1,12 @@
-[ [index](/README.md), [previous](/LIGHTNING-04-payment.md) ]
+[ [index](/README.md) | [<- previous](/LIGHTNING-03-channels.md) ]
 
 # Lightning Cross-Chain Swap
 
-Now that we have everything setup, we can execute swaps.
+This is the exciting part.
 
 ## Balance before the swap
 
-Before we execute the swap lets record the BTC and LTC channel balances on exchange A and B (check `local_balance` and `remote_balance`)
+Let's check the BTC and LTC channel balances on Exchange A and B before we execute the swap. In the outputs below, `local_balance` is the balance on Exchange A's side of the channel and `remote_balance` on Exchange B's side.
 
 ```shell
 $ xa-lnd-btc listchannels
@@ -34,6 +34,7 @@ $ xa-lnd-btc listchannels
         }
     ]
 }
+
 $ xa-lnd-ltc listchannels
 {
     "channels": [
@@ -62,26 +63,26 @@ $ xa-lnd-ltc listchannels
 ```
 
 
-## Now swap
+## SWAP
 
-Lets assume exchange B is the maker and exchange A is the Taker.
-The Maker is willing to sell 10000 LTC for 100 BTC
+In our example, Exchange A is willing to sell 200 satoshi (0.000002 BTC) for 10000 litoshi (0.0001 LTC).
 
-The command is executed against the taker XUD. 
+The command is executed against the `swap-resolver` which controls the `lnd`'s.
 
 ```shell
 $ cd $GOPATH/src/github.com/offerm/swap-resolver
 
-$go run cmd/xucli/main.go --rpcserver localhost:7001 takeorder --order_id=123 --maker_amount 100 --maker_coin BTC --taker_amount 10000 --taker_coin=LTC
+$go run cmd/xucli/main.go --rpcserver localhost:7001 takeorder --order_id=123 --maker_amount 200 --maker_coin BTC --taker_amount 10000 --taker_coin=LTC
 
-2018/08/03 20:57:35 Starting takeOrder command -  (*swapresolver.TakeOrderReq)(0xc4200a5c80)(orderid:"123" taker_amount:10000 taker_coin:LTC maker_amount:100 )
+2018/08/03 20:57:35 Starting takeOrder command -  (*swapresolver.TakeOrderReq)(0xc4200a5c80)(orderid:"123" taker_amount:10000 taker_coin:LTC maker_amount:200 )
 2018/08/03 20:57:36 Swap completed successfully.
   Swap preImage is  c7256829d2a731c76f98a08fae6f40965fc642d417d8c8249d0d560830d93217 
 ```
 
 ## Balance after the swap
 
-Let's see the impact in the channels (check `local_balance` and `remote_balance`)
+Let's see the impact in the channels. `local_balance` is the balance on Exchange A's side of the channel and `remote_balance` on Exchange B's side.
+
 ```shell
 $ xa-lnd-btc listchannels
 {
@@ -92,13 +93,13 @@ $ xa-lnd-btc listchannels
             "channel_point": "246c05860d1589898f9a22317915c935b021a198ae93c1eacc6fc835ca96b5ac:0",
             "chan_id": "1513035751963164672",
             "capacity": "16000000",
-            "local_balance": "12977456",
-            "remote_balance": "3000100",
+            "local_balance": "12977356",
+            "remote_balance": "3000200",
             "commit_fee": "22444",
             "commit_weight": "724",
             "fee_per_kw": "31000",
             "unsettled_balance": "0",
-            "total_satoshis_sent": "100",
+            "total_satoshis_sent": "200",
             "total_satoshis_received": "0",
             "num_updates": "2",
             "pending_htlcs": [
@@ -135,8 +136,8 @@ $ xa-lnd-ltc listchannels
 }
 ```
 
-100 Sat more, 10000 Lat less.
+As we can see, Exchange A now owns 10000 litoshi more and 200 satoshi less.
 
-Done!!!!
+Yay!
 
-[ [index](/README.md), [previous](/LIGHTNING-04-payment.md) ]
+[ [index](/README.md) | [<- previous](/LIGHTNING-03-channels.md) ]
