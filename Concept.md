@@ -1,6 +1,6 @@
 # A new approach to cross-chain swaps on lightning
 
-There are 2 players A and B which want to swap BTC for LTC instantly and without involvement of any third party. A agrees to exchange x BTC for y LTC from B. Since there is no trust between the parties, they can't do this in two separate transactions; it must be done in a single atomic swap operation on lightning.
+Let's assume there are 2 players A and B which want to swap BTC for LTC instantly and without involvement of any third party. A agrees to exchange x BTC for y LTC from B. Since there is no trust between the parties, they can't do this in two separate transactions; it must be done in a single atomic swap operation on lightning.
 
 ## Current Approach
 
