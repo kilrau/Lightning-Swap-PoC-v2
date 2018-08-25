@@ -22,16 +22,14 @@ While doable, there are some weaknesses in the current approach:
 * Swap and multi-chain support are on LND's roadmap but are not considered high on the priority list. This is why understandably any pull requests related to multi-chain won't be prioritized. 
 
 ## New Approach
-To overcome these shortcomings, we propose an alternative solution which can mostly be implemented outside of LND. The new solution only requires one small change to LND and potentially also make sense for non-multi-chain/swap use cases.
+To overcome these shortcomings, we propose an improved solution which can mostly be implemented outside of LND. The new solution only requires small changes to LND which potentially make sense for non-multi-chain/swap use cases, too.
 
 ### LND - the NEW approach
 The only change required to LND is the following:
 
-When a payment request arrives at an LND (node is the payee) and LND can't find the hash in its database, the node can query (RPC call) an external system, like [XUD](https://github.com/ExchangeUnion/xud/), for the pre-image.
+When a payment request arrives at an LND (payee) and LND can't find the hash in its database, it can query an external system, like [XUD](https://github.com/ExchangeUnion/xud/), for the pre-image via RPC call.
 
 ### The setup
-
-There are two players A and B. Each is running the following setup:
 * LTCD - connected to the litecoin chain
 * BTCD - connected to the bitcoin chain
 * An instance of LND configured for bitcoin and using the BTCD instance (`a-lnd-btc`, `b-lnd-btc`)
@@ -39,7 +37,6 @@ There are two players A and B. Each is running the following setup:
 * An instance of XUD which is aware of the LNDs processes (`a-XUD`, `b-XUD`)
 
 ### How the new swap works
-
 1. `a-XUD` and `b-XUD` agree to execute a swap of x BTC for y LTC via an external order exchange & matching mechanism.
 2. `a-XUD` creates a preimage and hashes it. The hash is shared with `b-XUD` and kept in both XUDs together with the swap information.
 3. `a-XUD` requests its `a-lnd-btc` to create a route and transfer x BTC to `b-lnd-btc`. "I will pay you x BTC if you know the preimage of the hash".
