@@ -9,10 +9,10 @@ To make our life easier with `lncli`, we recommend setting up aliases. Add the f
 
 ```bash
 #Adding lncli aliases
-alias xa-lnd-btc='lncli --rpcserver=localhost:10002 --no-macaroons'
-alias xa-lnd-ltc='lncli --rpcserver=localhost:10001 --no-macaroons'
-alias xb-lnd-btc='lncli --rpcserver=localhost:20002 --no-macaroons'
-alias xb-lnd-ltc='lncli --rpcserver=localhost:20001 --no-macaroons'
+alias xa-lnd-btc='lncli --network testnet --rpcserver=localhost:10002 --no-macaroons'
+alias xa-lnd-ltc='lncli --network testnet --rpcserver=localhost:10001 --no-macaroons'
+alias xb-lnd-btc='lncli --network testnet --rpcserver=localhost:20002 --no-macaroons'
+alias xb-lnd-ltc='lncli --network testnet --rpcserver=localhost:20001 --no-macaroons'
 ```
 
 Now we can use these aliases to communicate with the 4 `lnd` processes without the need to type long CLI arguments.
@@ -63,6 +63,9 @@ Open a terminal to set Exchange A's `xud` daemon
 cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-a/xud/
 ./start.bash
 ```
+[start.bash starts XUD. start_swap_start_swap_resolver.bash starts the swap-resolver.
+If we use XUD, it is better to start it after the LNDs completed the sync]
+
 
 
 ## Exchange B
@@ -94,6 +97,7 @@ Open a terminal to set Exchange B's `xud` daemon
 cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-b/xud/
 ./start.bash
 ```
+[Same note here]
 
 
 ## Coffee time v2
@@ -146,6 +150,7 @@ $ xa-lnd-ltc walletbalance
     "unconfirmed_balance": "0"
 }
 ```
+[Can also check the status of XUD (with getinfo) and make sure it is connected to the LNDs]
 
 ## Create BTC and LTC addresses for deposit
 
