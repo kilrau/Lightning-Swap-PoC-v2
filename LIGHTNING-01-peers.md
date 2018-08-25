@@ -31,7 +31,7 @@ To make life even easier, we find the following directory structure in `$GOPATH/
 		*	ltc (start.bash)
 	+	xud (start.bash)
 
-The `start.bash` script invokes the LND process using the right parameters (ports, etc). The `resolve.conf` is needed for the swap-resolver to function. Just FYI, no need to do anything for now.
+The `start.bash` script invokes the LND process using the right parameters (ports, etc). The `resolve.conf` is needed for the swap-resolver to function. Just FYI, no need to do anything for now. The xud directories include start.bash and start_swap_resolver.bash. The first can be used to start XUD while the second can be used to start the swap-resolver which simulates XUD.
 
 ## Exchange A
 ### Launch `lnd-btc`
