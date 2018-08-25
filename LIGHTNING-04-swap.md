@@ -61,7 +61,7 @@ $ xa-lnd-ltc listchannels
     ]
 }
 ```
-
+[If we use XUD it would be smart to check also getinfo of XUD]
 
 ## SWAP
 
@@ -72,7 +72,7 @@ The command is executed against the `swap-resolver` which controls the `lnd`'s.
 ```shell
 $ cd $GOPATH/src/github.com/offerm/swap-resolver
 
-$go run cmd/xucli/main.go --rpcserver localhost:7001 takeorder --order_id=123 --maker_amount 200 --maker_coin BTC --taker_amount 10000 --taker_coin=LTC
+$go run cmd/xucli/main.go --rpcserver localhost:8886 takeorder --order_id=123 --maker_amount 200 --maker_coin BTC --taker_amount 10000 --taker_coin=LTC
 
 2018/08/03 20:57:35 Starting takeOrder command -  (*swapresolver.TakeOrderReq)(0xc4200a5c80)(orderid:"123" taker_amount:10000 taker_coin:LTC maker_amount:200 )
 2018/08/03 20:57:36 Swap completed successfully.
