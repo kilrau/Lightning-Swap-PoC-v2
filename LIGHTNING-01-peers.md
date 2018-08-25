@@ -17,6 +17,10 @@ alias xb-lnd-ltc='lncli --network testnet --rpcserver=localhost:20001 --no-macar
 
 Now we can use these aliases to communicate with the 4 `lnd` processes without the need to type long CLI arguments.
 
+[If we decide to use XUD in this PoC we should also set XUDHOME 
+
+export XUDHOME=~/github/xud]
+
 ## Startup Scripts
 To make life even easier, we find the following directory structure in `$GOPATH/src/github.com/offerm/swap-resolver`:
 
