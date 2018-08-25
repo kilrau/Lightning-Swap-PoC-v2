@@ -4,26 +4,19 @@
 In this step we connect Exchange A and Exchange B on network level so they become peers of each other. We create two parallel P2P networks, one for BTC and one for LTC.    
 
 ## Establishing Connection
-First, we extract Exchange B's pubKeys, so we can use them to set connections and channels
+First, we extract Exchange B's pubKeys and bind them to `XB_BTC_PUBKEY` and `XB_LTC_PUBKEY`, so we can use them to set connections and channels
 
 ```shell
-$ XB_BTC_PUBKEY=`xb-lnd-btc getinfo|grep identity_pubkey|cut -d '"' -f 4`
-$ XB_LTC_PUBKEY=`xb-lnd-ltc getinfo|grep identity_pubkey|cut -d '"' -f 4`
+XB_BTC_PUBKEY=`xb-lnd-btc getinfo|grep identity_pubkey|cut -d '"' -f 4`
+XB_LTC_PUBKEY=`xb-lnd-ltc getinfo|grep identity_pubkey|cut -d '"' -f 4`
 ```
 
 
-By using Exchange B's `identity_pubkey`, host and port number, Exchange A establishes two connections, using the following commands
+By using Exchange B's pubKey, host and port number, Exchange A establishes two connections, using the following commands (output is `{}`, that's fine)
 
 ```shell
-$ xa-lnd-btc connect $XB_BTC_PUBKEY@127.0.0.1:20012
-{
-
-}
-
-$ xa-lnd-ltc connect $XB_LTC_PUBKEY@127.0.0.1:20011
-{
- 
-}
+xa-lnd-btc connect $XB_BTC_PUBKEY@127.0.0.1:20012
+xa-lnd-ltc connect $XB_LTC_PUBKEY@127.0.0.1:20011
 ```
 
 ### Exchange A post-connection

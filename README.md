@@ -1,6 +1,9 @@
 # Lightning Cross-Chain Atomic Swap PoC
 
 ### The Complete Guide
+
+This PoC guides through how to do Atomic Swaps on Lightning following a new approach for handling pre-images, which is described [here](/Concept.md). 
+
 00. [How to build and install the Lightning daemon](LIGHTNING-00-install.md)
 01. [How to setup and run peers using both bitcoin and litecoin chains](LIGHTNING-01-peers.md)
 02. [How to connect peers in the Lightning Network](LIGHTNING-02-connect.md)

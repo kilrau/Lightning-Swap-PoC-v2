@@ -163,7 +163,7 @@ $ xa-lnd-ltc newaddress np2wkh
 
 ## Send some money
 
-Send some BTC (0.2 or more is great) and some LTC (10 is great) to Exchange A's addresses via testnet faucets (see [README.bitcoin](README.bitcoin.md/#bitcoin-testnet-faucet) and [README.litecoin](README.litecoin.md/#litecoin-testnet-faucet)). Balances should appear in the wallet once the transactions are confirmed.
+Send some BTCt (0.2 or more is great) and some LTCt (10 is great) to Exchange A's addresses. You can get some for free via [bitcoin testnet faucets](README.bitcoin.md/#bitcoin-testnet-faucet) and [litecoin testnet faucets](README.litecoin.md/#litecoin-testnet-faucet). Balances should appear in the wallet once the transactions are confirmed.
 
 ## Balance after funding the wallets
 
@@ -184,7 +184,7 @@ $ xa-lnd-ltc walletbalance
 }
 ```
 
-We are now ready with Exchange A's wallets. Exchange B is left with zero balance wallets and this is fine for now. There is no need to separately fund Exchange B's wallets for our PoC, it will get funds in the channel setup [later](/LIGHTNING-03-channels.md). 
+We are now ready with Exchange A's wallets. Exchange B is left with zero balance wallets and this is fine for now. There is no need to separately fund Exchange B's wallets for our PoC, it will get funds via the channel setup [later](/LIGHTNING-03-channels.md). 
 
 We are now ready to move on to the next step and connect our `lnd` instances.
 

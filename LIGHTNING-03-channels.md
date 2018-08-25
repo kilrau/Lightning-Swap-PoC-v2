@@ -4,18 +4,19 @@
 
 ## Bitcoin
 
-Exchange A opens a bitcoin payment channel to Exchange B and pushes over 0.3 BTC at the same time. Exchange B finally got some bitcoin, yay!
+Exchange A opens a bitcoin payment channel to Exchange B and pushes over 0.1 BTC at the same time. Exchange B finally got some bitcoin, yay!
 
 ```shell
-$ xa-lnd-btc openchannel --node_key=$XB_BTC_PUBKEY --local_amt=16000000 --push_amt=3000000
+$ xa-lnd-btc openchannel --node_key=$XB_BTC_PUBKEY --local_amt=16000000 --push_amt=1000000
 {
-        "funding_txid": "246c05860d1589898f9a22317915c935b021a198ae93c1eacc6fc835ca96b5ac"
+	"funding_txid": "ea64f9bc10b9b81a3cdec7806b50fd0ba2212dee536cae4c3731b9dcdaa7320a"
 }
+
 ```
 
-The funding transaction must be confirmed for the channel to be opened. The default number of confirmations is 1.
+The output gives you the `txid` of the funding transaction for the channel. The funding transaction must be confirmed for the channel to be opened. The default number of confirmations is 1.
 
-Until confirmed, the pending channels can be seen with the `pendingchannels` command
+Until confirmed (which could take a while; testnet...), the pending channels can be seen with the `pendingchannels` command
 
 ```shell
 $ xa-lnd-btc  pendingchannels
@@ -79,7 +80,7 @@ $ xa-lnd-btc listchannels
 
 ## Litecoin
 
-Exchange A opens a litecoin payment channel to Exchange B and pushes over 0.1 LTC. Exchange B got some litecoin!
+Exchange A opens a litecoin payment channel to Exchange B and pushes over 0.05 LTC. Exchange B got some litecoin!
 
 ```shell
 $ xa-lnd-ltc openchannel --node_key=$XB_LTC_PUBKEY --local_amt=10000000 --push_amt=5000000 
@@ -88,7 +89,7 @@ $ xa-lnd-ltc openchannel --node_key=$XB_LTC_PUBKEY --local_amt=10000000 --push_a
 }
 ```
 
-Until confirmed, Exchange B lists the new channel as pending channel.
+Until confirmed (which could take a while; testnet...), Exchange B lists the new channel as pending channel.
 ```shell
 $ xb-lnd-ltc pendingchannels
 {
