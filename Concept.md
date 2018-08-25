@@ -54,4 +54,4 @@ When a payment request arrives at an LND (payee) and LND can't find the hash in 
 - the described swap approach makes partial order filling simpler
 - the described swap approach abstracts swap logic from the lightning implementation and thus makes integration of other lightning implementations and also e.g. raiden feasible
 
-[Here](/Readme.md) a complete guide along with the necessary tools to do the described swap yourself.
+[Here](/README.md) a complete guide along with the necessary tools to do the described swap yourself.
