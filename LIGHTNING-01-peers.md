@@ -17,12 +17,8 @@ alias xb-lnd-ltc='lncli --network testnet --rpcserver=localhost:20001 --no-macar
 
 Now we can use these aliases to communicate with the 4 `lnd` processes without the need to type long CLI arguments.
 
-[If we decide to use XUD in this PoC we should also set XUDHOME 
-
-export XUDHOME=~/github/xud]
-
 ## Startup Scripts
-To make life even easier, we find the following directory structure in `$GOPATH/src/github.com/offerm/swap-resolver`:
+To make life even easier, we find the following directory structure in `$GOPATH/src/github.com/ExchangeUnion/swap-resolver`:
 
 *	exchange-a
 	+	lnd (resolve.conf)
@@ -35,13 +31,13 @@ To make life even easier, we find the following directory structure in `$GOPATH/
 		*	ltc (start.bash)
 	+	xud (start.bash)
 
-The `start.bash` script invokes the LND process using the right parameters (ports, etc). The `resolve.conf` is needed for the swap-resolver to function. Just FYI, no need to do anything for now. The xud directories include start.bash and start_swap_resolver.bash. The first can be used to start XUD while the second can be used to start the swap-resolver which simulates XUD.
+The `start.bash` script invokes the LND process using the right parameters (ports, etc). The `resolve.conf` is needed for the swap-resolver to function. Just FYI, no need to do anything for now.
 
 ## Exchange A
 ### Launch `lnd-btc`
 Open a terminal to set Exchange A's `lnd-btc` daemon
 ```shell
-cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-a/lnd/btc/
+cd $GOPATH/src/github.com/ExchangeUnion/swap-resolver/exchange-a/lnd/btc/
 ./start.bash
 ```
 
@@ -52,7 +48,7 @@ xa-lnd-btc getinfo
 ### Launch `lnd-ltc`
 Open a terminal to set Exchange A's `lnd-ltc` daemon
 ```shell
-cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-a/lnd/ltc/
+cd $GOPATH/src/github.com/ExchangeUnion/swap-resolver/exchange-a/lnd/ltc/
 ./start.bash
 ```
 
@@ -64,19 +60,16 @@ xa-lnd-ltc getinfo
 ### Launch `swap-resolver`
 Open a terminal to set Exchange A's `xud` daemon
 ```shell
-cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-a/xud/
+cd $GOPATH/src/github.com/ExchangeUnion/swap-resolver/exchange-a/xud/
 ./start.bash
 ```
-[start.bash starts XUD. start_swap_start_swap_resolver.bash starts the swap-resolver.
-If we use XUD, it is better to start it after the LNDs completed the sync]
-
 
 
 ## Exchange B
 ### Launch `lnd-btc`
 Open a terminal to set Exchange B's `lnd-btc` daemon
 ```shell
-cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-b/lnd/btc/
+cd $GOPATH/src/github.com/ExchangeUnion/swap-resolver/exchange-b/lnd/btc/
 ./start.bash
 ```
 
@@ -87,7 +80,7 @@ xb-lnd-btc getinfo
 ### Launch `lnd-ltc`
 Open a terminal to set Exchange B's `lnd-ltc` daemon
 ```shell
-cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-b/lnd/ltc/
+cd $GOPATH/src/github.com/ExchangeUnion/swap-resolver/exchange-b/lnd/ltc/
 ./start.bash
 ```
 
@@ -98,10 +91,9 @@ xb-lnd-ltc getinfo
 ### Launch `swap-resolver`
 Open a terminal to set Exchange B's `xud` daemon
 ```shell
-cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-b/xud/
+cd $GOPATH/src/github.com/ExchangeUnion/swap-resolver/exchange-b/xud/
 ./start.bash
 ```
-[Same note here]
 
 
 ## Coffee time v2
@@ -154,7 +146,6 @@ $ xa-lnd-ltc walletbalance
     "unconfirmed_balance": "0"
 }
 ```
-[Can also check the status of XUD (with getinfo) and make sure it is connected to the LNDs]
 
 ## Create BTC and LTC addresses for deposit
 
