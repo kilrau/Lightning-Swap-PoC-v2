@@ -7,7 +7,7 @@
 Exchange A opens a bitcoin payment channel to Exchange B and pushes over 0.1 BTC at the same time. Exchange B finally got some bitcoin, yay!
 
 ```shell
-$ xa-lnd-btc openchannel --node_key=$XB_BTC_PUBKEY --local_amt=16000000 --push_amt=1000000
+$ xa-lnd-btc openchannel --node_key=$XB_BTC_PUBKEY --local_amt=16000000 --push_amt=1000000 --sat_per_byte=1000
 {
 	"funding_txid": "ea64f9bc10b9b81a3cdec7806b50fd0ba2212dee536cae4c3731b9dcdaa7320a"
 }
@@ -83,7 +83,7 @@ $ xa-lnd-btc listchannels
 Exchange A opens a litecoin payment channel to Exchange B and pushes over 0.05 LTC. Exchange B got some litecoin!
 
 ```shell
-$ xa-lnd-ltc openchannel --node_key=$XB_LTC_PUBKEY --local_amt=10000000 --push_amt=5000000 
+$ xa-lnd-ltc openchannel --node_key=$XB_LTC_PUBKEY --local_amt=10000000 --push_amt=5000000 --sat_per_byte=1000
 {
         "funding_txid": "e217a814b2f360050b6548acf042c7375d78588aeeee91fc44096d24174dd724"
 }
