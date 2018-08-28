@@ -9,16 +9,16 @@ To make our life easier with `lncli`, we recommend setting up aliases. Add the f
 
 ```bash
 #Adding lncli aliases
-alias xa-lnd-btc='lncli --rpcserver=localhost:10002 --no-macaroons'
-alias xa-lnd-ltc='lncli --rpcserver=localhost:10001 --no-macaroons'
-alias xb-lnd-btc='lncli --rpcserver=localhost:20002 --no-macaroons'
-alias xb-lnd-ltc='lncli --rpcserver=localhost:20001 --no-macaroons'
+alias xa-lnd-btc='lncli --network testnet --rpcserver=localhost:10002 --no-macaroons'
+alias xa-lnd-ltc='lncli --network testnet --rpcserver=localhost:10001 --no-macaroons'
+alias xb-lnd-btc='lncli --network testnet --rpcserver=localhost:20002 --no-macaroons'
+alias xb-lnd-ltc='lncli --network testnet --rpcserver=localhost:20001 --no-macaroons'
 ```
 
 Now we can use these aliases to communicate with the 4 `lnd` processes without the need to type long CLI arguments.
 
 ## Startup Scripts
-To make life even easier, we find the following directory structure in `$GOPATH/src/github.com/offerm/swap-resolver`:
+To make life even easier, we find the following directory structure in `$GOPATH/src/github.com/ExchangeUnion/swap-resolver`:
 
 *	exchange-a
 	+	lnd (resolve.conf)
@@ -37,7 +37,7 @@ The `start.bash` script invokes the LND process using the right parameters (port
 ### Launch `lnd-btc`
 Open a terminal to set Exchange A's `lnd-btc` daemon
 ```shell
-cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-a/lnd/btc/
+cd $GOPATH/src/github.com/ExchangeUnion/swap-resolver/exchange-a/lnd/btc/
 ./start.bash
 ```
 
@@ -48,7 +48,7 @@ xa-lnd-btc getinfo
 ### Launch `lnd-ltc`
 Open a terminal to set Exchange A's `lnd-ltc` daemon
 ```shell
-cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-a/lnd/ltc/
+cd $GOPATH/src/github.com/ExchangeUnion/swap-resolver/exchange-a/lnd/ltc/
 ./start.bash
 ```
 
@@ -60,7 +60,7 @@ xa-lnd-ltc getinfo
 ### Launch `swap-resolver`
 Open a terminal to set Exchange A's `xud` daemon
 ```shell
-cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-a/xud/
+cd $GOPATH/src/github.com/ExchangeUnion/swap-resolver/exchange-a/xud/
 ./start.bash
 ```
 
@@ -69,7 +69,7 @@ cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-a/xud/
 ### Launch `lnd-btc`
 Open a terminal to set Exchange B's `lnd-btc` daemon
 ```shell
-cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-b/lnd/btc/
+cd $GOPATH/src/github.com/ExchangeUnion/swap-resolver/exchange-b/lnd/btc/
 ./start.bash
 ```
 
@@ -80,7 +80,7 @@ xb-lnd-btc getinfo
 ### Launch `lnd-ltc`
 Open a terminal to set Exchange B's `lnd-ltc` daemon
 ```shell
-cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-b/lnd/ltc/
+cd $GOPATH/src/github.com/ExchangeUnion/swap-resolver/exchange-b/lnd/ltc/
 ./start.bash
 ```
 
@@ -91,7 +91,7 @@ xb-lnd-ltc getinfo
 ### Launch `swap-resolver`
 Open a terminal to set Exchange B's `xud` daemon
 ```shell
-cd $GOPATH/src/github.com/offerm/swap-resolver/exchange-b/xud/
+cd $GOPATH/src/github.com/ExchangeUnion/swap-resolver/exchange-b/xud/
 ./start.bash
 ```
 

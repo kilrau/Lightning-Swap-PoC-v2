@@ -11,7 +11,7 @@ Each exchange (A, B) is running several components which together provide full s
 2. `LTCD` - full node, connected to the litecoin chain
 3. `LND-BTC` - lightning network daemon for the BTC network
 4. `LND-LTC` - lightning network daemon for the LTC network
-5. `swap-resolver` - a simulator for [XUD](https://github.com/exchangeunion/xud), passing on payment hashes and pre-images between the `LND-BTC` and `LND-LTC` instances.
+5. `resolver` - ExchnageUnion's decentralized exchange layer [XUD](https://github.com/exchangeunion/xud) is being simulated by the `swap-resolver`. This component is passing payment hashes and pre-images between the `LND-BTC` and `LND-LTC` instances.
 
 ## Multiple Exchanges
 We are going to setup two exchanges on a single machine. For that we would need to run 2x5 processes. In this guide we will share the `BTCD` and `LTCD` instances between the two exchanges, so we'll only need 8 processes.
@@ -46,8 +46,8 @@ You will need the swap-resolver to pass on payment hashes and pre-images between
 
 Install `swap-resolver`
 ```shell
-git clone https://github.com/offerm/swap-resolver.git $GOPATH/src/github.com/offerm/swap-resolver
-cd $GOPATH/src/github.com/offerm/swap-resolver
+git clone https://github.com/ExchangeUnion/swap-resolver.git $GOPATH/src/github.com/ExchangeUnion/swap-resolver
+cd $GOPATH/src/github.com/ExchangeUnion/swap-resolver
 dep ensure
 ```
 
@@ -60,7 +60,7 @@ Since cross-chain swaps support was not yet merged into the official `lnd` maste
 Install the swap enabled `lnd`
 
 ```shell
-git clone -b resolver https://github.com/offerm/lnd.git $GOPATH/src/github.com/lightningnetwork/lnd
+git clone -b resolver https://github.com/ExchangeUnion/lnd.git $GOPATH/src/github.com/lightningnetwork/lnd
 cd $GOPATH/src/github.com/lightningnetwork/lnd
 make && make install
 ```
