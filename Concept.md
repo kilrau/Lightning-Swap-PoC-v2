@@ -45,7 +45,7 @@ When a payment request arrives at an LND (payee) and LND can't find the hash in 
 6. `a-lnd-ltc` does not know the preimage, so it informs `a-XUD`.
 7. `a-XUD` is the creator of the preimage and provides it to `a-lnd-ltc` which completes the LTC transaction by sending it to `b-lnd-ltc`.
 8. `b-lnd-ltc` forwards the preimage to `b-XUD` which in turn provides it to `b-lnd-btc`, which completes the transaction by sending it to `a-lnd-btc`.
-9. `a-XUD` receive the preimage and the swap is completed.
+9. `a-XUD` receives the preimage and the swap is completed.
 
 ### Notes
 - A and B do not need to have direct payment channels between each other. They can use multi-hops routes. The routes can be different for the LTC and BTC payment and are created separately.
