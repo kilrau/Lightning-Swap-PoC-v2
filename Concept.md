@@ -48,10 +48,10 @@ When a payment request arrives at an LND (payee) and LND can't find the hash in 
 9. `a-XUD` receives the preimage and the swap is completed.
 
 ### Notes
-- A and B do not need to have direct payment channels between each other. They can use multi-hops routes. The routes can be different for the LTC and BTC payment and are created separately.
+- A and B do not need to have direct payment channels between each other. They can use multi-hop routes. The routes can be different for the LTC and BTC payment and are created separately.
 - Discovery, order management & matching are done in a separate software layer and are not relevant for the order execution part which is described in this document.
 - For step 2., we are exploring sharing the hash directly within the HTLC instead of via a separate communication channel, which would also ommit a 'received hash' response.
-- the described swap approach makes partial order filling simpler
-- the described swap approach abstracts swap logic from the lightning implementation and thus makes integration of other lightning implementations and also e.g. raiden feasible
+- The described swap approach makes partial order filling simpler
+- The described swap approach abstracts swap logic from the lightning implementation and thus makes integration of other lightning implementations and also e.g. raiden feasible
 
 [Here](/README.md) a complete guide along with the necessary tools to do the described swap yourself.
