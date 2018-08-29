@@ -6,12 +6,12 @@ This guide can be used to perform an instant BTC<->LTC atomic swap between two e
 # Describing the setup
 
 ## Exchange setup
-Each exchange (A, B) is running several components which together provide full support for atomic swap between BTC and LTC:
+Each exchange (A, B) is running several components which together provide full support for an atomic swap between BTC and LTC:
 1. `BTCD` - full node, connected to the bitcoin chain
 2. `LTCD` - full node, connected to the litecoin chain
 3. `LND-BTC` - lightning network daemon for the BTC network
 4. `LND-LTC` - lightning network daemon for the LTC network
-5. `resolver` - ExchnageUnion's decentralized exchange layer [XUD](https://github.com/exchangeunion/xud) is being simulated by the `swap-resolver`. This component is passing payment hashes and pre-images between the `LND-BTC` and `LND-LTC` instances.
+5. `resolver` - a simulator for [XUD](https://github.com/exchangeunion/xud), Exchange Union's decentralized exchange layer. This component is passing payment hashes and pre-images between the `LND-BTC` and `LND-LTC` instances.
 
 ## Multiple Exchanges
 We are going to setup two exchanges on a single machine. For that we would need to run 2x5 processes. In this guide we will share the `BTCD` and `LTCD` instances between the two exchanges, so we'll only need 8 processes.
